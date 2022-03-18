@@ -1,0 +1,17 @@
+
+---
+- hosts: localhost
+  tasks:
+  - name: pull a docker image
+    docker_image:
+      name: naveen412/gradle:latest
+      source: pull
+
+
+  - name: deploy docker image as a container
+    docker_container:
+      name: testcontainer
+      image: naveen412/gradle:latest
+      state: started
+      ports:
+      - "8080:8080"
