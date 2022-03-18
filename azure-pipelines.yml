@@ -47,13 +47,14 @@ jobs:
 
 - job: Deploy
   displayName: Deploy
+  dependsOn: Build
   steps:
   - task: Ansible@0
     inputs:
       ansibleInterface: 'remoteMachine'
       connectionOverSsh: 'ansible-service-connection'
       playbookSourceRemoteMachine: 'agentMachine'
-      playbookRootRemoteMachine: '$(System.DefaultWorkingDirectory)/_gradle-Gradle-CI/drop'
+      playbookRootRemoteMachine: '$(build.artifactstagingdirectory)/_gradle-Gradle-CI/drop'
       playbookPathLinkedArtifactOnRemoteMachine: 'ansible.yml'
       inventoriesRemoteMachine: 'noInventory'
 
